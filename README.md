@@ -91,6 +91,61 @@ func main() {
 }
 
 ```
+### Reduce
+
+
+This function receives as a parameter an Array or a Slice, a initialValue and a function that executes something with the array position and converts to the type of initialValue
+
+This function transforms the array into a single value.
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/emachadomartins/go-loops"
+)
+
+type NumberRange struct {
+	Max float32
+	Min float32
+}
+
+func validateRange(previous NumberRange, value float32, index int) NumberRange {
+	var maxValue float32
+	var minValue float32
+
+	if value > previous.Max {
+		fmt.Printf("Value %v in index %v is bigger than %v\n", value, index, previous.Max)
+		maxValue = value
+	} else {
+		maxValue = previous.Max
+	}
+	if value < previous.Min {
+		fmt.Printf("Value %v in index %v is lower than %v\n", value, index, previous.Min)
+		minValue = value
+	} else {
+		minValue = previous.Min
+	}
+
+	return NumberRange{
+		Max: maxValue,
+		Min: minValue,
+	}
+}
+
+func main() {
+	arr := []float32{8.3, 12.4, 0.5, 80.12, -31.2, -90.5, 228.12, 34.9, 100.25}
+
+	var initialValue NumberRange = NumberRange{arr[0], arr[0]}
+
+	finalValue := goloops.Reduce(initialValue, arr, validateRange)
+
+	fmt.Printf("Max value is :%v\n", finalValue.Max)
+	fmt.Printf("Min value is :%v\n", finalValue.Min)
+}
+
+```
 
 
 
