@@ -58,4 +58,39 @@ func main() {
 ```
 
 
+### Filter
+
+
+This function receives as a parameter an Array or a Slice and a function that executes something with the array position as a parameter and returns boolean.
+
+This function returns only the values that the condition return the value **true**.
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/emachadomartins/go-loops"
+)
+
+
+func checkMultipleOf5(value int, index int) bool {
+	condition := value % 5 == 0
+	if condition {
+		fmt.Printf("%v: %v\n", index, value)
+	}
+	return condition
+}
+
+func main() {
+	arr := []int{1, 5, 8, 25, 78, 23, 55, 10, 20}
+
+	filterArr := goloops.Filter(arr, checkMultipleOf5)
+
+	fmt.Println(filterArr)
+}
+
+```
+
+
 
